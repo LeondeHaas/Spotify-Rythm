@@ -38,7 +38,12 @@ namespace Spotify
                     {
                         Playlist selectedPlaylist = playlists[playlistNumber - 1];
                         Console.WriteLine($"Opening playlist: {selectedPlaylist.PlaylistTitle}");
-                        //show songs of the chosen playlist.
+
+                        List<Song> songs = selectedPlaylist.GetSongs();
+                        foreach (var song in songs)
+                        {
+                            Console.WriteLine($"[{song.SongId}] {song.Title} - {song.Artist} [Duration: {song.Playtime}]");
+                        }
                     }
                     else
                     {
