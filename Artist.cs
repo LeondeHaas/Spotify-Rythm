@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace Spotify
 {
-    internal class Artist
+    public class Artist
     {
+        public string ArtistName { get; set; }
+        public int ArtistId { get; set; }
+
+
+
+        public Artist(string ArtistName, int ArtistId)
+        {
+        //  ArtistName = artistname;
+        //  ArtistId = artistid;
+        }
     }
 }
