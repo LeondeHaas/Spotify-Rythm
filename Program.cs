@@ -70,7 +70,17 @@ namespace Spotify
                     {
                         Song selectedSong = songs[songNumber - 1];
                         Console.WriteLine("Currently playing: " + selectedSong.Title + " by " + selectedSong.Artist);
-                        System.Threading.Thread.Sleep(selectedSong.Playtime * 1000);
+
+                        Console.Write("Playing song!: ");
+
+                        for (int remainingSeconds = selectedSong.Playtime; remainingSeconds > 0; remainingSeconds--)
+                        {
+                            Console.Write(remainingSeconds.ToString().PadLeft(2) + " ");
+                            System.Threading.Thread.Sleep(1000); // Sleep for 1 second
+                            Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop); // Move cursor back to overwrite the previous number
+                        }
+
+                        Console.WriteLine("\nSong finished!");
                     }
                     else
                     {

@@ -26,7 +26,7 @@ namespace Spotify
                 new Song(2, 2, "Counting Stars", "Artist 2"),
                 new Song(2, 3, "Outside", "Artist 3"),
                 new Song(2, 4, "NIGHT DANCER", "Artist 4"),
-                new Song(20, 5, "Carol Of The Bells", "Artist 5"),
+                new Song(5, 5, "Carol Of The Bells", "Artist 5"),
                 new Song(20, 6, "Mercury", "Artist 6"),
                 new Song(20, 7, "Wonderland", "Neoni"),
                 new Song(20, 8, "All Falls Down", "Alan Walker"),
@@ -38,7 +38,7 @@ namespace Spotify
 
         public void PauseSong()
         {
-        } 
+        }
 
         public void ResumeSong()
         {

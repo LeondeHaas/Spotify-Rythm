@@ -54,12 +54,12 @@ namespace Spotify
             //Neoni playlist || index 3
             playlists[3].AddSong(new Song(200, 1, "DARKSIDE", "Neoni"));
             playlists[3].AddSong(new Song(210, 2, "WONDERLAND", "Neoni"));
-            playlists[3].AddSong(new Song(210, 2, "Haunted House", "Neoni"));
+            playlists[3].AddSong(new Song(210, 3, "Haunted House", "Neoni"));
 
             //Lofi Chill Beats playlist || index 4
             playlists[4].AddSong(new Song(190, 1, "The Girl I Haven't Met", "Lofi Beats"));
-            playlists[4].AddSong(new Song(180, 2, "letting go", "Artist Name"));
-            playlists[4].AddSong(new Song(180, 2, "Pine Leaves", "Artist Name"));
+            playlists[4].AddSong(new Song(180, 2, "letting go", "Lofi Beats"));
+            playlists[4].AddSong(new Song(180, 2, "Pine Leaves", "Lofi Beats"));
 
             return playlists;
         }
