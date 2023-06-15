@@ -14,7 +14,7 @@ namespace Spotify
                 Console.WriteLine("Welcome to Spotify!");
                 Console.WriteLine("Choose an option :");
                 Console.WriteLine("[1] Playlists");
-                Console.WriteLine("[2] Albums");
+                Console.WriteLine("[2] Artists");
                 Console.WriteLine("[3] Songs");
                 Console.WriteLine("[4] Friendlist");
 
@@ -44,26 +44,75 @@ namespace Spotify
                         {
                             Console.WriteLine($"[{song.SongId}] {song.Title} - {song.Artist} [Duration: {song.Playtime}]");
                         }
+
+                        Console.WriteLine("Enter the song number to play:");
+                        int songNumber = Convert.ToInt32(Console.ReadLine());
+
+                        if (songNumber >= 1 && songNumber <= songs.Count)
+                        {
+                            Song selectedSong = songs[songNumber - 1];
+                            Console.WriteLine("Currently playing: " + selectedSong.Title + " by " + selectedSong.Artist);
+
+                            Console.Write("Playing song!: ");
+
+                            for (int remainingSeconds = selectedSong.Playtime; remainingSeconds > 0; remainingSeconds--)
+                            {
+                                Console.Write(remainingSeconds.ToString().PadLeft(2) + " ");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
+                            }
+
+                            Console.WriteLine("\nSong finished!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
+                        }
                     }
                     else
                     {
                         Console.WriteLine("The playlist you selected is either invalid or does not exist. Please try again.");
                     }
                 }
-                else if (input == 2) // Shows albums
+                else if (input == 2)
                 {
-                    Console.WriteLine("List of albums");
+                    Console.WriteLine("List of Artists:");
+                    List<Artist> artists = Artist.GetArtists();
+                    foreach (var artist in artists)
+                    {
+                        Console.WriteLine($"[{artist.ArtistId}] {artist.ArtistName}");
+                    }
+
+                    Console.WriteLine("Select an artist by entering the artist ID:");
+                    int artistId = Convert.ToInt32(Console.ReadLine());
+
+                    Artist selectedArtist = artists.Find(artist => artist.ArtistId == artistId);
+                    if (selectedArtist != null)
+                    {
+                        Console.WriteLine($"Selected artist: {selectedArtist.ArtistName}");
+
+                        List<Album> albums = selectedArtist.Albums;
+                        Console.WriteLine("List of Albums:");
+                        foreach (var album in albums)
+                        {
+                            Console.WriteLine(album.AlbumTitle);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("The Artist you selected is either invalid or does not exist. Please try again.");
+                    }
                 }
                 else if (input == 3) // Shows songs
                 {
                     Console.WriteLine("List of Songs:");
-                    Console.WriteLine("Which song would you like to play?");
                     List<Song> songs = Song.GetSongList();
                     foreach (var song in songs)
                     {
                         Console.WriteLine($"[{song.SongId}] {song.Title} - {song.Artist} [Duration: {song.Playtime}]");
                     }
 
+                    Console.WriteLine("Enter the song number to play:");
                     int songNumber = Convert.ToInt32(Console.ReadLine());
 
                     if (songNumber >= 1 && songNumber <= songs.Count)
@@ -76,8 +125,8 @@ namespace Spotify
                         for (int remainingSeconds = selectedSong.Playtime; remainingSeconds > 0; remainingSeconds--)
                         {
                             Console.Write(remainingSeconds.ToString().PadLeft(2) + " ");
-                            System.Threading.Thread.Sleep(1000); // Sleep for 1 second
-                            Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop); // Move cursor back to overwrite the previous number
+                            System.Threading.Thread.Sleep(1000);
+                            Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
                         }
 
                         Console.WriteLine("\nSong finished!");
@@ -87,9 +136,13 @@ namespace Spotify
                         Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
                     }
                 }
-                else if (input == 4) // Shows friend list
+                else if (input == 4)
                 {
-                    Console.WriteLine("List of Friends");
+                    Console.WriteLine("Friendlist is currently unavailable. Please try again later.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please try again.");
                 }
 
                 // Restart the program

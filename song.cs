@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Spotify
 {
@@ -9,6 +8,7 @@ namespace Spotify
         public int SongId { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
+        public bool IsPaused { get; set; }
 
         public Song(int playtime, int songId, string title, string artist)
         {
@@ -16,6 +16,7 @@ namespace Spotify
             SongId = songId;
             Title = title;
             Artist = artist;
+            IsPaused = false;
         }
 
         public static List<Song> GetSongList()
@@ -38,11 +39,12 @@ namespace Spotify
 
         public void PauseSong()
         {
+            IsPaused = true;
         }
 
         public void ResumeSong()
         {
-
+            IsPaused = false;
         }
 
         public void StopSong()

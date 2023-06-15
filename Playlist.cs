@@ -37,29 +37,29 @@ namespace Spotify
             };
 
             //Favourites playlist || index 0
-            playlists[0].AddSong(new Song(180, 1, "IDOL", "YOASOBI"));
-            playlists[0].AddSong(new Song(210, 2, "Die In a Fire", "The Living Tombstone"));
-            playlists[0].AddSong(new Song(190, 3, "Never Gonna Give You Up", "Rick Astley"));
+            playlists[0].AddSong(new Song(5, 1, "IDOL", "YOASOBI"));
+            playlists[0].AddSong(new Song(10, 2, "Die In a Fire", "The Living Tombstone"));
+            playlists[0].AddSong(new Song(15, 3, "Never Gonna Give You Up", "Rick Astley"));
 
             //YOASIBI playlist || index 1
-            playlists[1].AddSong(new Song(180, 1, "夜に駆ける", "YOASOBI"));
-            playlists[1].AddSong(new Song(200, 2, "もう少しだけ", "YOASOBI"));
-            playlists[1].AddSong(new Song(200, 3, "あの夢をなぞって", "YOASOBI"));
+            playlists[1].AddSong(new Song(5, 1, "夜に駆ける", "YOASOBI"));
+            playlists[1].AddSong(new Song(10, 2, "もう少しだけ", "YOASOBI"));
+            playlists[1].AddSong(new Song(15, 3, "あの夢をなぞって", "YOASOBI"));
 
             //NEFFEX playlist || index 2
-            playlists[2].AddSong(new Song(220, 1, "Cold", "NEFFEX"));
-            playlists[2].AddSong(new Song(240, 2, "Careless", "NEFFEX"));
-            playlists[2].AddSong(new Song(240, 3, "Soldier", "NEFFEX"));
+            playlists[2].AddSong(new Song(60, 1, "Cold", "NEFFEX"));
+            playlists[2].AddSong(new Song(60, 2, "Careless", "NEFFEX"));
+            playlists[2].AddSong(new Song(60, 3, "Soldier", "NEFFEX"));
 
             //Neoni playlist || index 3
-            playlists[3].AddSong(new Song(200, 1, "DARKSIDE", "Neoni"));
-            playlists[3].AddSong(new Song(210, 2, "WONDERLAND", "Neoni"));
-            playlists[3].AddSong(new Song(210, 3, "Haunted House", "Neoni"));
+            playlists[3].AddSong(new Song(20, 1, "DARKSIDE", "Neoni"));
+            playlists[3].AddSong(new Song(21, 2, "WONDERLAND", "Neoni"));
+            playlists[3].AddSong(new Song(21, 3, "Haunted House", "Neoni"));
 
             //Lofi Chill Beats playlist || index 4
-            playlists[4].AddSong(new Song(190, 1, "The Girl I Haven't Met", "Lofi Beats"));
-            playlists[4].AddSong(new Song(180, 2, "letting go", "Lofi Beats"));
-            playlists[4].AddSong(new Song(180, 2, "Pine Leaves", "Lofi Beats"));
+            playlists[4].AddSong(new Song(19, 1, "The Girl I Haven't Met", "Lofi Beats"));
+            playlists[4].AddSong(new Song(18, 2, "letting go", "Lofi Beats"));
+            playlists[4].AddSong(new Song(18, 2, "Pine Leaves", "Lofi Beats"));
 
             return playlists;
         }
