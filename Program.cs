@@ -49,7 +49,6 @@ namespace Spotify
                         break;
                 }
 
-                // Restart the program
                 Console.WriteLine("Press [B] to start over.");
                 string restartInput = Console.ReadLine();
                 restart = (restartInput == "B" || restartInput == "b");
