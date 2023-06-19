@@ -1,3 +1,3 @@
 # Rythm
 
-Welcome to Rythm! This C# aplication simulates a Spotify aplication.
+Welcome to Rythm! This is a C# aplication that simulates a Spotify aplication.
