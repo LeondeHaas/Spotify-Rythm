@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Spotify
 {
@@ -7,26 +8,23 @@ namespace Spotify
     {
         static void Main(string[] args)
         {
+            BootUpDelay();
+
             bool restart = true;
 
             while (restart)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Welcome to Spotify!");
-                Console.ResetColor();
+                Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-                Console.WriteLine("Choose an option:");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("[1] Playlists");
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("[2] Artists");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("[3] Songs");
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("[4] Friendlist");
+                Console.WriteLine("Welcome to \u001b[31mR\u001b[33my\u001b[32mt\u001b[34mh\u001b[35mm\u001b[36m!\u001b[0m");
+                Console.WriteLine("What would you like to see?");
+                Console.WriteLine("[1] \U0001F4D6 Playlists");
+                Console.WriteLine("[2] \U0001F9D1 Artists");
+                Console.WriteLine("[3] \U0001F3B5 Songs");
+                Console.WriteLine("[4] \U0001F465 Friendlist");
+                Console.WriteLine("[5] \u274C Exit");
 
                 int input = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(input);
 
                 switch (input)
                 {
@@ -42,25 +40,47 @@ namespace Spotify
                     case 4:
                         HandleFriendlist();
                         break;
+                    case 5:
+                        restart = false;
+                        break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid input. Please try again.");
-                        Console.ResetColor();
                         break;
                 }
 
-                Console.WriteLine("Press [B] to start over.");
-                string restartInput = Console.ReadLine();
-                restart = (restartInput == "B" || restartInput == "b");
-                Console.WriteLine();
+                if (restart)
+                {
+                    Console.WriteLine("Press [B] to start over.");
+                    string restartInput = Console.ReadLine();
+                    restart = (restartInput == "B" || restartInput == "b");
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine("Leaving Rythm, but the beats will forever echo in your soul.");
+                    Thread.Sleep(1000);
+                    Environment.Exit(0);
+                }
             }
+        }
+
+        static void BootUpDelay()
+        {
+            Console.WriteLine("Launching Rythm... Get ready to groove!");
+
+            for (int count = 1500; count >= 0; count -= 10)
+            {
+                Console.Write(count.ToString().PadLeft(4, '0') + " ");
+                Thread.Sleep(10);
+                Console.SetCursorPosition(Console.CursorLeft - 5, Console.CursorTop);
+            }
+
+            Console.Clear();
         }
 
         static void HandlePlaylists()
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("List of Playlists:");
-            Console.ResetColor();
             Console.WriteLine("Which playlist would you like to open?");
 
             List<Playlist> playlists = Playlist.GetPlaylists();
@@ -74,9 +94,7 @@ namespace Spotify
             if (playlistNumber >= 1 && playlistNumber <= playlists.Count)
             {
                 Playlist selectedPlaylist = playlists[playlistNumber - 1];
-                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.WriteLine($"Opening playlist: {selectedPlaylist.PlaylistTitle}");
-                Console.ResetColor();
 
                 List<Song> songs = selectedPlaylist.GetSongs();
                 PrintSongs(songs);
@@ -90,24 +108,18 @@ namespace Spotify
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
-                    Console.ResetColor();
                 }
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The playlist you selected is either invalid or does not exist. Please try again.");
-                Console.ResetColor();
             }
         }
 
         static void HandleArtists()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("List of Artists:");
-            Console.ResetColor();
 
             List<Artist> artists = Artist.GetArtists();
             foreach (var artist in artists)
@@ -121,14 +133,10 @@ namespace Spotify
             Artist selectedArtist = artists.Find(artist => artist.ArtistId == artistId);
             if (selectedArtist != null)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"Selected artist: {selectedArtist.ArtistName}");
-                Console.ResetColor();
 
                 List<Album> albums = selectedArtist.Albums;
-                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("List of Albums:");
-                Console.ResetColor();
                 foreach (var album in albums)
                 {
                     Console.WriteLine(album.AlbumTitle);
@@ -136,17 +144,13 @@ namespace Spotify
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The Artist you selected is either invalid or does not exist. Please try again.");
-                Console.ResetColor();
             }
         }
 
         static void HandleSongs()
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("List of Songs:");
-            Console.ResetColor();
 
             List<Song> songs = Song.GetSongList();
             PrintSongs(songs);
@@ -160,17 +164,13 @@ namespace Spotify
             }
             else
             {
-                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
-                Console.ResetColor();
             }
         }
 
         static void HandleFriendlist()
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Friendlist is currently unavailable. Please try again later."); //this is temporary
-            Console.ResetColor();
         }
 
         static void PrintSongs(List<Song> songs)
@@ -188,14 +188,24 @@ namespace Spotify
             Console.Write("Playing song!: ");
             for (int remainingSeconds = song.Playtime; remainingSeconds > 0; remainingSeconds--)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(remainingSeconds.ToString().PadLeft(2) + " ");
-                Console.ResetColor();
-                System.Threading.Thread.Sleep(1000);
+                string colorCode = "\u001b[32m";        // Green
+                if (remainingSeconds <= 5)
+                {
+                    if (remainingSeconds == 5)
+                        colorCode = "\u001b[33m";       // Yellow
+                    else if (remainingSeconds == 4)
+                        colorCode = "\u001b[38;5;208m"; // Orange
+                    else if (remainingSeconds <= 3)
+                        colorCode = "\u001b[31m";       // Red
+                }
+
+                Console.Write(colorCode + remainingSeconds.ToString().PadLeft(2) + " ");
+                Thread.Sleep(1000);
                 Console.SetCursorPosition(Console.CursorLeft - 3, Console.CursorTop);
             }
 
-            Console.WriteLine("\nSong finished!");
+            Console.WriteLine("\u001b[0m\nSong finished!"); // Reset color to default
         }
+
     }
 }
