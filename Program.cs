@@ -14,6 +14,7 @@ namespace Spotify
 
             while (restart)
             {
+                //Welcome screen with unicode support.
                 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
                 Console.WriteLine("Welcome to \u001b[31mR\u001b[33my\u001b[32mt\u001b[34mh\u001b[35mm\u001b[36m!\u001b[0m");
@@ -26,6 +27,8 @@ namespace Spotify
 
                 int input = Convert.ToInt32(Console.ReadLine());
 
+
+                //switch case for menu that handles different methods.
                 switch (input)
                 {
                     case 1:
@@ -170,7 +173,7 @@ namespace Spotify
 
         static void HandleFriendlist()
         {
-            Console.WriteLine("Friendlist is currently unavailable. Please try again later."); //this is temporary
+            Console.WriteLine("Friendlist is currently unavailable. Please try again later."); 
         }
 
         static void PrintSongs(List<Song> songs)

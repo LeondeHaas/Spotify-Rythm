@@ -2,10 +2,12 @@
 
 public class Artist
 {
+    // Properties
     public string ArtistName { get; set; }
     public int ArtistId { get; set; }
     public List<Album> Albums { get; set; }
 
+    // Constructor
     public Artist(int artistId, string artistName)
     {
         ArtistId = artistId;
@@ -13,11 +15,13 @@ public class Artist
         Albums = new List<Album>();
     }
 
+    // Method to add an album to an artist
     public void AddAlbum(Album album)
     {
         Albums.Add(album);
     }
 
+    // Method to get a list of artists
     public static List<Artist> GetArtists()
     {
         List<Artist> artists = new List<Artist>()
@@ -28,6 +32,8 @@ public class Artist
             new Artist(4, "Bemax"),
             new Artist(5, "The Living Tombstone")
         };
+
+        // Add songs for each artist
 
         // Add albums for each artist
         artists[0].AddAlbum(new Album("Imagine Dragons TOP 10"));
