@@ -4,12 +4,14 @@ namespace Spotify
 {
     public class Song
     {
+        // Properties
         public int Playtime { get; set; }
         public int SongId { get; set; }
         public string Title { get; set; }
         public string Artist { get; set; }
         public bool IsPaused { get; set; }
 
+        // Constructor
         public Song(int playtime, int songId, string title, string artist)
         {
             Playtime = playtime;
@@ -19,6 +21,7 @@ namespace Spotify
             IsPaused = false;
         }
 
+        // Method to get a list of songs
         public static List<Song> GetSongList()
         {
             List<Song> songs = new List<Song>()
