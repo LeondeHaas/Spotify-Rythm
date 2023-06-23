@@ -4,10 +4,12 @@ namespace Spotify
 {
     public class Playlist
     {
+        // Properties
         public int PlaylistId { get; set; }
         public string PlaylistTitle { get; set; }
         private List<Song> Songs { get; set; }
 
+        // Constructor
         public Playlist(int playlistId, string playlistTitle)
         {
             PlaylistId = playlistId;
@@ -15,16 +17,19 @@ namespace Spotify
             Songs = new List<Song>();
         }
 
+        // Methods to add and get songs
         public void AddSong(Song song)
         {
             Songs.Add(song);
         }
 
+        // Method to get a list of songs
         public List<Song> GetSongs()
         {
             return Songs;
         }
 
+        // Method to get a list of playlists
         public static List<Playlist> GetPlaylists()
         {
             List<Playlist> playlists = new List<Playlist>()
@@ -35,6 +40,8 @@ namespace Spotify
                 new Playlist(4, "Neoni"),
                 new Playlist(5, "Lofi Chill Beats")
             };
+
+            // Add songs to each playlist
 
             //Favourites playlist || index 0
             playlists[0].AddSong(new Song(5, 1, "IDOL", "YOASOBI"));
@@ -59,7 +66,7 @@ namespace Spotify
             //Lofi Chill Beats playlist || index 4
             playlists[4].AddSong(new Song(19, 1, "The Girl I Haven't Met", "Lofi Beats"));
             playlists[4].AddSong(new Song(18, 2, "letting go", "Lofi Beats"));
-            playlists[4].AddSong(new Song(18, 2, "Pine Leaves", "Lofi Beats"));
+            playlists[4].AddSong(new Song(18, 3, "Pine Leaves", "Lofi Beats"));
 
             return playlists;
         }

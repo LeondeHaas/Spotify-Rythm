@@ -14,7 +14,7 @@ namespace Spotify
 
             while (restart)
             {
-                //Welcome screen with unicode support.
+                // Welcome screen with unicode support.
                 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
                 Console.WriteLine("Welcome to \u001b[31mR\u001b[33my\u001b[32mt\u001b[34mh\u001b[35mm\u001b[36m!\u001b[0m");
@@ -28,7 +28,7 @@ namespace Spotify
                 int input = Convert.ToInt32(Console.ReadLine());
 
 
-                //switch case for menu that handles different methods.
+                // Switch case for menu that handles different methods.
                 switch (input)
                 {
                     case 1:
@@ -51,6 +51,7 @@ namespace Spotify
                         break;
                 }
 
+                // If-else statement to restart the program and/or exit it.
                 if (restart)
                 {
                     Console.WriteLine("Press [B] to start over.");
@@ -67,11 +68,12 @@ namespace Spotify
             }
         }
 
+        // Method that simulates booting up the program.
         static void BootUpDelay()
         {
             Console.WriteLine("Launching Rythm... Get ready to groove!");
 
-            for (int count = 1500; count >= 0; count -= 10)
+            for (int count = 1000; count >= 0; count -= 10)
             {
                 Console.Write(count.ToString().PadLeft(4, '0') + " ");
                 Thread.Sleep(10);
@@ -81,6 +83,7 @@ namespace Spotify
             Console.Clear();
         }
 
+        // Method that opens the selected playlist, shows the songs in a playlist, and plays the song.
         static void HandlePlaylists()
         {
             Console.WriteLine("List of Playlists:");
@@ -102,24 +105,29 @@ namespace Spotify
                 List<Song> songs = selectedPlaylist.GetSongs();
                 PrintSongs(songs);
 
-                Console.WriteLine("Enter the song number to play:");
+                Console.WriteLine("Enter the song number to play (or 0 to play all songs):");
                 int songNumber = Convert.ToInt32(Console.ReadLine());
 
-                if (songNumber >= 1 && songNumber <= songs.Count)
+                if (songNumber == 0)
+                {
+                    PlayAllSongs(songs);
+                }
+                else if (songNumber >= 1 && songNumber <= songs.Count)
                 {
                     PlaySong(songs[songNumber - 1]);
                 }
                 else
                 {
-                    Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
+                    Console.WriteLine("Invalid song number. Please try again.");
                 }
             }
             else
             {
-                Console.WriteLine("The playlist you selected is either invalid or does not exist. Please try again.");
+                Console.WriteLine("Invalid playlist number. Please try again.");
             }
         }
 
+        // Method that opens a list of artists, shows the albums of the selected artist, and plays the song.
         static void HandleArtists()
         {
             Console.WriteLine("List of Artists:");
@@ -147,10 +155,11 @@ namespace Spotify
             }
             else
             {
-                Console.WriteLine("The Artist you selected is either invalid or does not exist. Please try again.");
+                Console.WriteLine("Invalid artist number. Please try again.");
             }
         }
 
+        // Method that opens a list of songs and plays the song.
         static void HandleSongs()
         {
             Console.WriteLine("List of Songs:");
@@ -167,15 +176,23 @@ namespace Spotify
             }
             else
             {
-                Console.WriteLine("The song you selected is either invalid or does not exist. Please try again.");
+                Console.WriteLine("Invalid song number. Please try again.");
             }
         }
 
+        // Method that opens a list of friends.
         static void HandleFriendlist()
         {
-            Console.WriteLine("Friendlist is currently unavailable. Please try again later."); 
+            Console.WriteLine("My friends:");
+
+            List<Friend> friends = Friend.GetFriends();
+            foreach (var friend in friends)
+            {
+                Console.WriteLine($"[{friend.FriendId}] {friend.Name}");
+            }
         }
 
+        // Method that prints the songs in a playlist.
         static void PrintSongs(List<Song> songs)
         {
             foreach (var song in songs)
@@ -184,11 +201,12 @@ namespace Spotify
             }
         }
 
+        // Method that plays a single song.
         static void PlaySong(Song song)
         {
-            Console.WriteLine("Currently playing: " + song.Title + " by " + song.Artist);
+            Console.WriteLine($"Playing: {song.Title} - {song.Artist}");
 
-            Console.Write("Playing song!: ");
+            Console.Write("Playing song! ");
             for (int remainingSeconds = song.Playtime; remainingSeconds > 0; remainingSeconds--)
             {
                 string colorCode = "\u001b[32m";        // Green
@@ -210,5 +228,16 @@ namespace Spotify
             Console.WriteLine("\u001b[0m\nSong finished!"); // Reset color to default
         }
 
+        // Method that plays all songs in a playlist.
+        static void PlayAllSongs(List<Song> songs)
+        {
+            Console.WriteLine("Playing all songs in the playlist:");
+
+            foreach (var song in songs)
+            {
+                PlaySong(song);
+                Console.WriteLine();
+            }
+        }
     }
 }
